@@ -1,6 +1,8 @@
 public interface TriggerInterface
 {
-    public void unlock(Lock input);
+    //Abstract unlock method to so that Lock class can work with any unlcok() from any Trigger class
+    public void unlock(Object input);
 
-    public void lock(Lock input);
+    //Abstract lock method to so that Lock class can work with any unlcok() from any Trigger class
+    public void lock(Object input);
 }
