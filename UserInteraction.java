@@ -28,7 +28,7 @@ public class UserInteraction
         securityQuestions = new ArrayList<String>();
         securityAnswers = new ArrayList<String>();
     }
-    
+   
   
     /**
      * constructs a userInteraction with a username and a password.
@@ -74,10 +74,17 @@ public class UserInteraction
     public void firstUser()
     {
         ConsoleIO kb = new ConsoleIO();
+        String input;
         System.out.print("Welcome. Please enter a username: ");
         username = kb.readLine();
         System.out.print("Please enter a password: ");
         password = kb.readLine();
+        do
+        {
+            addSecurityQuestion();
+            System.out.print("Would you like to add more? [Y/N] : ");
+            input = kb.readLine();
+        }while(input.equalsIgnoreCase("y"));
     }
     
     /**
@@ -95,14 +102,17 @@ public class UserInteraction
         {
             System.out.print("Please enter your current username: ");
             testUser = kb.readLine();
-            while(failedAttempts < 3 && !testUser.equals(username))
+            while(failedAttempts < 2 && !testUser.equals(username))
             {
-                System.out.print("\nIncorrect. Please try again (remaining attempts: " + (3-failedAttempts) + "): ");
+                
+                System.out.print("\nIncorrect. Please try again (remaining attempts: " + (2-failedAttempts) + "): ");
                 testUser = kb.readLine();
-                failedAttempts++;
+                if(!testUser.equals(username))
+                    failedAttempts++;
+                
             }
             
-            if(failedAttempts == 3)     //safeguards against guessing
+            if(failedAttempts == 2)     //safeguards against guessing
             {
                 System.out.println("\nSYSTEM LOCKED");
             }
@@ -120,12 +130,15 @@ public class UserInteraction
             System.out.println(securityQuestions.get(question));
             System.out.print("Answer: ");
             testAns = kb.readLine();
-            while(failedAttempts < 3 && !testAns.equals(securityAnswers.get(question)))
+            while(failedAttempts < 2 && !testAns.equals(securityAnswers.get(question)))
             {
-                System.out.print("Incorrect. Please try again (remaining attempts: " + (3 - failedAttempts) + "): ");
+                
+                System.out.print("Incorrect. Please try again (remaining attempts: " + (2 - failedAttempts) + "): ");
                 testAns = kb.readLine();
+                if(!testAns.equals(securityAnswers.get(question)))
+                    failedAttempts++;
             }
-            if(failedAttempts == 3)     //safeguards against guessing
+            if(failedAttempts == 2)     //safeguards against guessing
             {
                 System.out.println("\nSYSTEM LOCKED");
             }
