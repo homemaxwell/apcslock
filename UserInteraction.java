@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class UserInteraction extends GUI
 {
@@ -19,6 +21,7 @@ public class UserInteraction extends GUI
     private ArrayList<String> securityQuestions;
     private ArrayList<String> securityAnswers;
     int count = 1;
+    private BluetoothHandler green;
     
     /**
      * constructs a userInteraction with a name, password, and a filename to save the data in.
@@ -26,6 +29,7 @@ public class UserInteraction extends GUI
     public UserInteraction(String file)
     {
         super("", "");
+        green = new BluetoothHandler();
         fileName = file;
         readData();
         saveData();
@@ -38,11 +42,19 @@ public class UserInteraction extends GUI
     public UserInteraction()
     {
         super("", "");
+        green = new BluetoothHandler();
         fileName = "saveData.txt";
         securityQuestions = new ArrayList<String>();
         securityAnswers = new ArrayList<String>();
         firstUser();
     }
+    
+    /*try 
+        {
+            new BluetoothHandler().go();
+        } catch (Exception ex) {
+            Logger.getLogger(BluetoothHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
     
     public int getCount()
     {
@@ -213,6 +225,12 @@ public class UserInteraction extends GUI
                     }
                     else
                     {
+                        try 
+                        {
+                            green.alarm();
+                        } catch (Exception ex) {
+                            Logger.getLogger(BluetoothHandler.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         errorMessage();
                         uhOhPop();
                     }
@@ -352,6 +370,12 @@ public class UserInteraction extends GUI
                int hold = getAttempts();
                if (text.getText().equals(username) && new String(pass.getPassword()).equals(password))
                {
+                   try 
+                   {
+                        green.open();
+                   } catch (Exception ex) {
+                        Logger.getLogger(BluetoothHandler.class.getName()).log(Level.SEVERE, null, ex);
+                   }
                    checkLock();
                    unLockPop();
                }
@@ -365,6 +389,12 @@ public class UserInteraction extends GUI
                    }
                    else
                    {
+                       try 
+                       {
+                            green.alarm();
+                       } catch (Exception ex) {
+                            Logger.getLogger(BluetoothHandler.class.getName()).log(Level.SEVERE, null, ex);
+                       }
                        errorMessage();                        
                        uhOhPop();
                    }
@@ -406,5 +436,5 @@ public class UserInteraction extends GUI
         }
         return new String(ret);
     }
-    
+   
 }
