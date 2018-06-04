@@ -12,29 +12,39 @@ import javax.bluetooth.ServiceRecord;
 import javax.bluetooth.UUID;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
-public class HC05 {
-boolean scanFinished = false;
-String hc05Url =
-"btspp://201610094738:1;authenticate=false;encrypt=false;master=false"; //Replace this with your bluetooth URL
-public static void main(String[] args) {
-try {
-new HC05().go();
-} catch (Exception ex) {
-Logger.getLogger(HC05.class.getName()).log(Level.SEVERE, null, ex);
-}
-}
-private void go() throws Exception {
-StreamConnection streamConnection = (StreamConnection)
-Connector.open(hc05Url);
-OutputStream os = streamConnection.openOutputStream();
-InputStream is = streamConnection.openInputStream();
-os.write("1".getBytes()); //'1' means ON and '0' means OFF
-os.close();
-byte[] b = new byte[200];
-Thread.sleep(200);
-is.read(b);
-is.close();
-streamConnection.close();
-System.out.println("received " + new String(b));
-}
+
+public class BluetoothHandler {
+    boolean scanFinished = false;
+    String piURL = "btspp://201610094738:1;authenticate=false;encrypt=false;master=false"; //Replace this with your bluetooth URL
+    
+    public BluetoothHandler()
+    {
+    }
+
+    public void open() throws Exception
+    {
+        StreamConnection streamConnection = (StreamConnection)
+        Connector.open(piURL);
+        OutputStream os = streamConnection.openOutputStream();
+        os.write("1".getBytes());
+        os.close();
+    }
+    
+    private void lock() throws Exception 
+    {
+        StreamConnection streamConnection = (StreamConnection)
+        Connector.open(piURL);
+        OutputStream os = streamConnection.openOutputStream();
+        os.write("0".getBytes());
+        os.close();
+    }
+    
+    public void alarm() throws Exception
+    {
+         StreamConnection streamConnection = (StreamConnection)
+         Connector.open(piURL);
+         OutputStream os = streamConnection.openOutputStream();
+         os.write("2".getBytes());
+         os.close();
+    }
 }
