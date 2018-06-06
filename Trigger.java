@@ -27,7 +27,7 @@ public class Trigger {
         //Set servo to neutral
         com.pi4j.wiringpi.Gpio.pwmSetRange(0);
         com.pi4j.wiringpi.Gpio.pwmSetClock(0);
-        pwm.setPwm(0):
+        pwm.setPwm(0);
         
         //shutdown Gpio pins
         pwm.setShutdownOptions(true, PinState.LOW, PinPUllResistance.OFF);
