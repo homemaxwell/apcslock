@@ -2,7 +2,7 @@
  * Write a description of class UserInteraction here.
  *
  * @author (Max McLoughlin)
- * @version (a version number or a date)
+ * @version (1)
  */
 import chn.util.*;
 import java.util.*;
