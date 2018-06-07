@@ -6,6 +6,8 @@ import java.net.*;
  * sends the client the current date and time, then closes the
  * connection with that client.  Arguably just about the simplest
  * server you can write.
+ * @author Maxwell Chang
+ * @version (1)
  */
 public class WirelessPi {
 
@@ -13,7 +15,7 @@ public class WirelessPi {
      * Runs the server.
      */
     public static void main(String[] args) throws IOException, InterruptedException {
-        String serverAddress = "192.168.1.25";
+        String serverAddress = "192.168.1.25";      //address of client
         BufferedReader input = null;
         ServerSocket listener = new ServerSocket(9090);
         String in = null;
