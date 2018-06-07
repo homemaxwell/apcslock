@@ -1,8 +1,8 @@
 /**
- * Write a description of class UserInteraction here.
+ * Has all the carious methods to display various parts during the run
  *
- * @author (Max McLoughlin)
- * @version (1)
+ * @author Max McLoughlin & Yaman Chaudhary
+ * @version 1
  */
 import chn.util.*;
 import java.util.*;
@@ -15,72 +15,71 @@ import java.util.logging.Level;
 
 public class UserInteraction extends GUI
 {
-    private String username;
-    private String password;
-    private String fileName;
-    private ArrayList<String> securityQuestions;
-    private ArrayList<String> securityAnswers;
-    int count = 1;
-    private WirelessHandler green;
+    private String username; // holds the username
+    private String password; // holds the password
+    private String fileName; // holds the name of the file (saveData.txt)
+    private ArrayList<String> securityQuestions; // has all of the security questions
+    private ArrayList<String> securityAnswers; // has all of the answers, with matching indexes
+    int count = 1; // used later for attempt counting
+    private WirelessHandler green; // to connect through wi-fi 
     
     /**
-     * constructs a userInteraction with a name, password, and a filename to save the data in.
+     * constructs a userInteraction with a filename with data in it
      */
     public UserInteraction(String file)
     {
-        super("", "");
-        green = new WirelessHandler();
-        fileName = file;
-        readData();
-        saveData();
-        lockScreen();
-    }
+        super("", ""); // start off without anything
+        green = new WirelessHandler(); // create the wi-fi connection
+        fileName = file; // saveData.txt
+        readData(); // read in the data
+        saveData(); // save it right now to refill the saveData.txt
+        lockScreen(); // open up the lockscreen
+    } 
     
     /**
-     * constructs a UserInteraction without a username or a password.
+     * constructs a UserInteraction without a filename with data in it
      */
     public UserInteraction()
     {
-        super("", "");
-        green = new WirelessHandler();
-        fileName = "saveData.txt";
-        securityQuestions = new ArrayList<String>();
+        super("", ""); // nothing
+        green = new WirelessHandler(); // wi-fi connection
+        fileName = "saveData.txt"; 
+        securityQuestions = new ArrayList<String>(); 
         securityAnswers = new ArrayList<String>();
-        firstUser();
+        firstUser(); // opens up the first user screen (to create an "account")
     }
     
-    /*try 
-        {
-            new BluetoothHandler().go();
-        } catch (Exception ex) {
-            Logger.getLogger(BluetoothHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-    
+    /**
+     * pretty much getAttempts from the parent class but needed for another attempt counter
+     *
+     * @return the attempt number so far
+     */
     public int getCount()
     {
-        int ret = count;
-        count++;
+        int ret = count; 
+        count++; 
         return ret;
     }
     
     /**
-     * Adds a security question and answer to their respective arraylists.
+     * Adds a security question and answer to their respective arraylists, each index has the question and its answer
      */
     public void addSecurityQuestion()
     {
         clearAll();
-        frame.setVisible(false);
+        frame.setVisible(false); // hide the frame
         
-        ConsoleIO kb = new ConsoleIO();
-        JLabel label = new JLabel("Enter a security question: ");
-        JTextField question = new JTextField(15);
+        ConsoleIO kb = new ConsoleIO(); // input
+        JLabel label = new JLabel("Enter a security question: "); // labels are just text
+        JTextField question = new JTextField(15); // text fields have an empty box where the user can type
         JLabel label2 = new JLabel("Enter the answer: ");
         JTextField answer  = new JTextField(15);
-        JButton done = new JButton("Submit");
+        JButton done = new JButton("Submit"); // buttons are to click to do something else
         JButton more = new JButton("Add Another");
         SpringLayout layout = new SpringLayout();
         frame.setLayout(layout);
         
+        // add it all to the frame
         frame.add(label);
         frame.add(question);
         frame.add(label2);
@@ -88,6 +87,7 @@ public class UserInteraction extends GUI
         frame.add(done);
         frame.add(more);
         
+        // move them all to the correct location
         layout.putConstraint(SpringLayout.WEST, label, 5, SpringLayout.WEST, frame.getContentPane());
         layout.putConstraint(SpringLayout.NORTH, label, 5, SpringLayout.NORTH, frame.getContentPane());
         layout.putConstraint(SpringLayout.WEST, question, 5, SpringLayout.EAST, label);
@@ -102,10 +102,10 @@ public class UserInteraction extends GUI
         layout.putConstraint(SpringLayout.NORTH, more, 10, SpringLayout.SOUTH, label2);
         
 
-        frame.setVisible(true);
+        frame.setVisible(true); // show the frame
         
         
-        
+        // action listener for the button, this waits until the user clicks the submit button
         done.addActionListener(new ActionListener(){
 
             @Override
@@ -118,6 +118,7 @@ public class UserInteraction extends GUI
 
          });
          
+        // action listener for the other button, waits until user clicks the Add Another button
         more.addActionListener(new ActionListener(){
 
             @Override
@@ -135,18 +136,20 @@ public class UserInteraction extends GUI
      */
     public void firstUser()
     {
-        frame.setVisible(false);
+        frame.setVisible(false); // hide the frame
         JLabel hi = new JLabel("We have determined that this is your first time using this lock!");
         JLabel words = new JLabel("Enter a username: ");
         JTextField name = new JTextField(15);
-        JPasswordField pass = new JPasswordField(15);
+        JPasswordField pass = new JPasswordField(15); // password fields are text fields but hide the mesage inside
         JLabel passWord = new JLabel("Enter a password: ");
         JButton but = new JButton("Done");
         SpringLayout layout = new SpringLayout();
         frame.setLayout(layout);
         
+        // add everything
         frame.add(hi); frame.add(words); frame.add(name); frame.add(pass); frame.add(passWord); frame.add(but);
         
+        // place the items into the right locations
         layout.putConstraint(SpringLayout.WEST, hi, 5, SpringLayout.WEST, frame.getContentPane());
         layout.putConstraint(SpringLayout.NORTH, hi, 5, SpringLayout.NORTH, frame.getContentPane());
         layout.putConstraint(SpringLayout.WEST, words, 5, SpringLayout.WEST, frame.getContentPane());
@@ -160,8 +163,9 @@ public class UserInteraction extends GUI
         layout.putConstraint(SpringLayout.WEST, but, 5, SpringLayout.WEST, frame.getContentPane());
         layout.putConstraint(SpringLayout.NORTH, but, 10, SpringLayout.SOUTH, pass);
         
-        frame.setVisible(true);
+        frame.setVisible(true); // show the frame
         
+        // action listener for the Done button, clicked when user is done entering their info
         but.addActionListener(new ActionListener(){
 
             @Override
@@ -185,7 +189,7 @@ public class UserInteraction extends GUI
     {
         clearAll();
         int hold = getCount();
-        frame.setVisible(false);
+        frame.setVisible(false); // hide the frame
         int question = (int)(Math.random()*securityQuestions.size());   //picks a question at random
         JLabel q = new JLabel(securityQuestions.get(question));
         JLabel words = new JLabel("Enter the answer: ");
@@ -194,8 +198,10 @@ public class UserInteraction extends GUI
         SpringLayout layout = new SpringLayout();
         frame.setLayout(layout);
         
+        // add everything to the frame
         frame.add(q); frame.add(words); frame.add(ans); frame.add(but);
         
+        // places them in the correct locations
         layout.putConstraint(SpringLayout.WEST, q, 5, SpringLayout.WEST, frame.getContentPane());
         layout.putConstraint(SpringLayout.NORTH, q, 5, SpringLayout.NORTH, frame.getContentPane());
         layout.putConstraint(SpringLayout.WEST, words, 5, SpringLayout.WEST, frame.getContentPane());
@@ -205,8 +211,9 @@ public class UserInteraction extends GUI
         layout.putConstraint(SpringLayout.WEST, but, 5, SpringLayout.WEST, frame.getContentPane());
         layout.putConstraint(SpringLayout.NORTH, but, 10, SpringLayout.SOUTH, ans);
         
-        frame.setVisible(true);
+        frame.setVisible(true); // shows frame
         
+        // action listener for the done button, clicked when user has entered the answer
         but.addActionListener(new ActionListener(){
 
             @Override
@@ -241,18 +248,23 @@ public class UserInteraction extends GUI
          });
     }
     
+    /**
+     * prompts the user for a new password once they get the security question right
+     */
     public void getNewPassword()
     {
-        clearAll();
-        frame.setVisible(false);
+        clearAll(); 
+        frame.setVisible(false); // hide the frame
         JLabel words = new JLabel("Enter the new password: ");
         JPasswordField pass = new JPasswordField(15);
         JButton but = new JButton("Done");
         SpringLayout layout = new SpringLayout();
         frame.setLayout(layout);
         
+        // add parts onto the frame
         frame.add(words); frame.add(pass); frame.add(but);
         
+        // place them in the right spots 
         layout.putConstraint(SpringLayout.WEST, words, 5, SpringLayout.WEST, frame.getContentPane());
         layout.putConstraint(SpringLayout.NORTH, words, 5, SpringLayout.NORTH, frame.getContentPane());
         layout.putConstraint(SpringLayout.WEST, pass, 5, SpringLayout.EAST, words);
@@ -260,8 +272,9 @@ public class UserInteraction extends GUI
         layout.putConstraint(SpringLayout.WEST, but, 5, SpringLayout.WEST, frame.getContentPane());
         layout.putConstraint(SpringLayout.NORTH, but, 10, SpringLayout.SOUTH, words);
         
-        frame.setVisible(true);
+        frame.setVisible(true); // show frame
         
+        // action listener for the done button, clicked when user is done entering a new password
         but.addActionListener(new ActionListener(){
 
             @Override
@@ -316,8 +329,8 @@ public class UserInteraction extends GUI
     public void lockScreen()
     {
         clearAll(); 
-        frame.setVisible(false);
-        JTextField text = new JTextField(15);
+        frame.setVisible(false); // hide the frame
+        JTextField text = new JTextField(15); 
         JLabel label = new JLabel("Username: ");
         JButton done = new JButton("Submit");
         JButton forgot = new JButton("Forgot Password");
@@ -327,6 +340,9 @@ public class UserInteraction extends GUI
         Container contentPane = frame.getContentPane();
          
         SpringLayout layout = new SpringLayout();
+        
+        // adds the data and puts them in the correct locations
+      
         frame.setLayout(layout);
         frame.add(label);
          
@@ -353,8 +369,9 @@ public class UserInteraction extends GUI
         layout.putConstraint(SpringLayout.WEST, forgot, 5, SpringLayout.EAST, done);
         layout.putConstraint(SpringLayout.NORTH, forgot, 10, SpringLayout.SOUTH, pass);
          
-        frame.setVisible(true);
+        frame.setVisible(true); // show the frame
          
+        // action listener for when the user forgot his password, clicks forgot button
         forgot.addActionListener(new ActionListener(){
 
            @Override
@@ -363,11 +380,13 @@ public class UserInteraction extends GUI
             }
         });
         
+        // action listener for when the user wants to check if his username and password are correct (done button)
         done.addActionListener(new ActionListener(){
 
            @Override
            public void actionPerformed(ActionEvent e) {
                int hold = getAttempts();
+               // if user is right
                if (text.getText().equals(username) && new String(pass.getPassword()).equals(password))
                {
                    try 
@@ -381,12 +400,14 @@ public class UserInteraction extends GUI
                }
                else
                {
+                   // if less then 3 attempts have passed
                    if (hold < 3)
                    {
                        attemptsPop(hold);
                        frame.getContentPane().removeAll();
                        lockScreen();
                    }
+                   // if more than 3 attempts have passed
                    else
                    {
                        try 
@@ -403,6 +424,9 @@ public class UserInteraction extends GUI
         });
     }
     
+    /*
+     * 
+     */
     private void unLocktoLock()
     {  
         JButton done = new JButton("Lock It");
@@ -419,6 +443,23 @@ public class UserInteraction extends GUI
         layout.putConstraint(SpringLayout.NORTH, done, 10, SpringLayout.SOUTH, label);
         frame.revalidate();
         frame.repaint();
+        
+        // action listener for the done button, clicked when user is done with the lock and wants to close the lock again
+        done.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try
+                {
+                     green.lock();
+                }
+                catch (Exception ex)
+                {
+                     Logger.getLogger(WirelessHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+          });
     }
     
     private String encrypt(String s)
