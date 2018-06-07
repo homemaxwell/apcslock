@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Trigger
+comment1.params=
+comment1.target=Trigger()
+comment2.params=
+comment2.target=void\ unlock()
+comment2.text=\n\ unlock\ -\ will\ unlock\ the\ lock\n
+comment3.params=
+comment3.target=void\ lock()
+comment3.text=\n\ lock\ -\ locks\ the\ lock\n
+comment4.params=
+comment4.target=boolean\ isLock()
+comment4.text=\n\ isLock\ -\ checks\ status\ of\ servo\ motor\n\ @return\ returns\ true\ and\ false\ based\ on\ the\ status\ of\ the\ servo\n
+comment5.params=
+comment5.target=void\ alarm()
+comment5.text=\n\ errorSys\ -\ triggers\ speakers\ when\ met\ with\ error,\ if\ lock\ is\ unlocked,\ then\ it\ will\ lock\ the\ system\n
+numComments=6

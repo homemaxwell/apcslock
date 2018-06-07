@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=WirelessPi
+comment0.text=\n\ A\ TCP\ server\ that\ runs\ on\ port\ 9090.\ \ When\ a\ client\ connects,\ it\n\ sends\ the\ client\ the\ current\ date\ and\ time,\ then\ closes\ the\n\ connection\ with\ that\ client.\ \ Arguably\ just\ about\ the\ simplest\n\ server\ you\ can\ write.\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment1.text=\n\ Runs\ the\ server.\n
+numComments=2
