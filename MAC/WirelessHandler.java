@@ -1,5 +1,5 @@
 /**
- * Write a description of class DateServer here.
+ * This class is for the client-side wireless interactions with the raspberrypi
  *
  * @author (Maxwell Chang, Max McLoughlin)
  * @version (1)
