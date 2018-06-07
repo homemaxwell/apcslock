@@ -1,3 +1,9 @@
+/**
+ * Write a description of class UserInteraction here.
+ *
+ * @author (Max McLoughlin, Maxwell Chang)
+ * @version (1)
+ */
 import com.pi4j.wiringpi.*;
 import sun.audio.*;
 import javax.sound.sampled.*;
@@ -9,6 +15,9 @@ public class Trigger {
     private int timeMS = 300
     ;
     
+    /**
+      * default constructor, sets the pin to position 0 
+    **/
     public Trigger() {
         Gpio.wiringPiSetup();
         SoftPwm.softPwmCreate(PinNumber, 0, 1000);
