@@ -52,40 +52,48 @@ public abstract class GUI
     }
     
     /**
-     *
-     *
-     *
-     *
+     * this displays an error message on the screen for when the user screws up too many times
      */
     public void errorMessage()
     {
-        frame.getContentPane().removeAll();
-        JLabel label = new JLabel("INTRUDER ALRERT!");
-        SpringLayout layout = new SpringLayout();
-        frame.setLayout(layout);
-        Container contentPane = frame.getContentPane();
-        frame.add(label);
-        layout.putConstraint(SpringLayout.WEST, label, 5, SpringLayout.WEST, contentPane);
-        layout.putConstraint(SpringLayout.NORTH, label, 5, SpringLayout.NORTH, contentPane);
-        frame.revalidate();
-        frame.repaint();
+        frame.getContentPane().removeAll(); // clear the frame just in case
+        JLabel label = new JLabel("INTRUDER ALRERT!"); // label with text "INTRUDER ALERT"
+        SpringLayout layout = new SpringLayout(); // SpringLayout is the hardest layout but its easy to move around objects freely
+        frame.setLayout(layout); // set the layout to SpringLayout
+        Container contentPane = frame.getContentPane(); // get the contentPane to know where to move the objects
+        frame.add(label); // add the label to the frame
+        layout.putConstraint(SpringLayout.WEST, label, 5, SpringLayout.WEST, contentPane); // move the x location of the label
+        layout.putConstraint(SpringLayout.NORTH, label, 5, SpringLayout.NORTH, contentPane); // move the y location of the label
+        frame.revalidate(); // this lets the frame recognize the changes
+        frame.repaint(); // this lets the frame add the changes
     }
     
+    /**
+     * creates a pop that displays the error text when the user messes up
+     */
     public void uhOhPop()
     {
+        // this creates a pop up on the frame with the alarm activated text on it with the header showing attempts left and the message having an error logo on it
         JOptionPane.showMessageDialog(frame, "Alarm activated! You are an Intruder!", "0 attempts left!", JOptionPane.ERROR_MESSAGE);
     }
     
+    /**
+     * This is used to get the amount of attempts left
+     */
     public int getAttempts()
     {
-        int ret = attempts;
-        attempts++;
-        return ret;
+        int ret = attempts; // hold the value of attempts
+        attempts++; // increase attempts (an attempt has passed)
+        return ret; // return the original value of attempts
     }
     
+    /**
+     * creates a pop that displays the good test when the user does good
+     */
     public void unLockPop()
     {
-        String text = new String("Welcome Back!");
+        String text = new String("Welcome Back!"); // a String holding the text to display
+        // this creates a pop up on the frame with the text "Welcome Back" with the header showing that the lock is unlocked and the message having no logo
         JOptionPane.showMessageDialog(frame, text, "Lock unlocked!", JOptionPane.PLAIN_MESSAGE);
     }
 }
