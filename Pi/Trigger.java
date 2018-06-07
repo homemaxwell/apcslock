@@ -28,20 +28,20 @@ public class Trigger {
      * unlock - will unlock the lock
      */
     public void unlock() {
-        int positionNumber = 5;
+        int positionNumber = 5; // 25% duty cycle turns motor clockwise
         
         if(positionNumber >= 0 && positionNumber <= 20)
         {
-            value = positionNumber;
-            SoftPwm.softPwmWrite(PinNumber, value + 5);
+            value = positionNumber; // positionValue is stored in 
+            SoftPwm.softPwmWrite(PinNumber, value + 5); // PinNumber refers to the GPIO pin on raspberryPi, moves the servo 90 degrees
             
             try
             {
-                Thread.sleep(timeMS);
+                Thread.sleep(timeMS); // time delay between moving and stopping
             }
             catch(InterruptedException e){}
             
-            SoftPwm.softPwmWrite(PinNumber, 0);
+            SoftPwm.softPwmWrite(PinNumber, 0); // PMW signal stops, therefore the servo stops moving
         }
     }
 
@@ -50,20 +50,20 @@ public class Trigger {
      */
     public void lock()
     {
-        int positionNumber = 15;
+        int positionNumber = 15; // duty cycle is 75% turns the servo counterclockwise
         
-        if(positionNumber >= 0 && positionNumber <= 20)
+        if(positionNumber >= 0 && positionNumber <= 20) 
         {
-            value = positionNumber;
+            value = positionNumber; // PinNumber refers to the GPIO pin on raspberryPi, moves the servo -90 degrees
             SoftPwm.softPwmWrite(PinNumber, value + 5);
             
             try
             {
-                Thread.sleep(timeMS);
+                Thread.sleep(timeMS); // time delay between moving and stopping
             }
             catch(InterruptedException e){}
             
-            SoftPwm.softPwmWrite(PinNumber, 0);
+            SoftPwm.softPwmWrite(PinNumber, 0); // PMW signal stops, therefore the servo stops moving
         }
     }
     
@@ -72,12 +72,12 @@ public class Trigger {
      * @return returns true and false based on the status of the servo
      */
     public boolean isLock() {
-        boolean status = true;
-        if(value != 15)
+        boolean status = true; //lock starts in lock position
+        if(value != 15) //if it is unlocked it will store the status as false
             status = false;
         
             
-        return status;
+        return status; 
     }
 
     
@@ -88,13 +88,13 @@ public class Trigger {
     {
             
         System.out.println("Evil! evil! intruder alert!");
-        File f = new File("alarm.wav");
+        File f = new File("alarm.wav"); //imports .wav into File object f
         
         try{
-            AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());  
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioIn);
-            clip.start();
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());  //  
+            Clip clip = AudioSystem.getClip(); 
+            clip.open(audioIn); 
+            clip.start(); // starts playing the alarm sound
         }
         catch(Exception ex){}
     }
