@@ -1,8 +1,8 @@
 /**
  * Write a description of class DateServer here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author (Maxwell Chang, Max McLoughlin)
+ * @version (1)
  */
 import java.io.*;
 import java.net.*;
@@ -10,7 +10,7 @@ import sun.audio.*;
 import javax.sound.sampled.*;
 public class WirelessHandler
 {
-    private String serverAddress = "192.168.1.29";
+    private String serverAddress = "192.168.1.29";      //client address
     
     /**
      * default constructor
