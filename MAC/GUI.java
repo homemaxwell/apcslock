@@ -1,15 +1,16 @@
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-
 /**
  * GUI holds standard functions that a GUI needs to do
  *
  * @author Yaman Chaudhary
  * @version 1
  */
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+
+
 public abstract class GUI
 {
     String username; // holds the username of the user
