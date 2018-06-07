@@ -2,16 +2,16 @@ import java.io.*;
 
 
 /**
- * Write a description of class Driver here.
+ * Runs the lock program
  *
- * @author 
- * @version (a version number or a date)
+ * @author Yaman Chaudhary
+ * @version 1
  */
 public class Driver
 {
     public static void main(String[] args)
     {
-        File f = new File("saveData.txt");    
+        File f = new File("saveData.txt");  // gets file "saveData.txt" which contains usernam, password, and security questions if the program has been run before  
         if (f.exists())
         {
             UserInteraction i = new UserInteraction("saveData.txt");
